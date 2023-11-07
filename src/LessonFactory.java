@@ -1,12 +1,12 @@
 public abstract class LessonFactory {
 
-    public Lesson createLesson(String type, Date startDate, Date endDate, String subject) {
+    public static Lesson createLesson(String type, Date startDate, Date endDate, String subject) {
         Lesson lesson = null;
-        if (type == "TD") {
+        if (type.toUpperCase().equals("TD")) {
             lesson = new TD(startDate, endDate, subject);
-        } else if (type == "TP") {
+        } else if (type.toUpperCase().equals("TP")) {
             lesson = new TP(startDate, endDate, subject);
-        } else if (type == "CC") {
+        } else if (type.toUpperCase().equals("CC")) {
             lesson = new CC(startDate, endDate, subject);
         }
         return lesson;
