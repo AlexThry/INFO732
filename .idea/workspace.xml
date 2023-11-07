@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44492b3f-110b-4bc6-8b51-51478ccc817f" name="Changes" comment="workspace.xml" />
+    <list default="true" id="5d13dc1c-ad73-414b-a531-059faa792faa" name="Changes" comment="pré merge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +19,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -38,7 +43,6 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -51,7 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698412324565</updated>
       <workItem from="1698412325735" duration="4516000" />
-      <workItem from="1699364528832" duration="8112000" />
+      <workItem from="1699364528832" duration="2379000" />
     </task>
     <task id="LOCAL-00001" summary="Adding classes">
       <created>1699367140798</created>
@@ -60,35 +64,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699367140798</updated>
     </task>
-    <task id="LOCAL-00002" summary="Adding constructor">
-      <created>1699370834990</created>
+    <task id="LOCAL-00002" summary="test branche">
+      <created>1699369395891</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1699370834990</updated>
+      <updated>1699369395891</updated>
     </task>
-    <task id="LOCAL-00003" summary="Adding LessonFactory">
-      <created>1699370873959</created>
+    <task id="LOCAL-00003" summary="toString">
+      <created>1699372699987</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1699370873959</updated>
+      <updated>1699372699987</updated>
     </task>
-    <task id="LOCAL-00004" summary="Adding Main">
-      <created>1699370893134</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1699370893134</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Updating workspace.xml">
-      <created>1699370909194</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1699370909194</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,7 +89,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="affichage" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -107,10 +109,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding classes" />
-    <MESSAGE value="Adding constructor" />
-    <MESSAGE value="Adding LessonFactory" />
-    <MESSAGE value="Adding Main" />
-    <MESSAGE value="Updating workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating workspace.xml" />
+    <MESSAGE value="test branche" />
+    <MESSAGE value="toString" />
+    <option name="LAST_COMMIT_MESSAGE" value="toString" />
   </component>
 </project>
