@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44492b3f-110b-4bc6-8b51-51478ccc817f" name="Changes" comment="Adding classes">
+    <list default="true" id="44492b3f-110b-4bc6-8b51-51478ccc817f" name="Changes" comment="Updating workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LessonFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LessonFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698412324565</updated>
       <workItem from="1698412325735" duration="4516000" />
-      <workItem from="1699364528832" duration="5606000" />
+      <workItem from="1699364528832" duration="8112000" />
     </task>
     <task id="LOCAL-00001" summary="Adding classes">
       <created>1699367140798</created>
@@ -67,7 +63,35 @@
       <option name="project" value="LOCAL" />
       <updated>1699367140798</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding constructor">
+      <created>1699370834990</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699370834990</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding LessonFactory">
+      <created>1699370873959</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699370873959</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding Main">
+      <created>1699370893134</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699370893134</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updating workspace.xml">
+      <created>1699370909194</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699370909194</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,6 +110,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding classes" />
+    <MESSAGE value="Adding constructor" />
+    <MESSAGE value="Adding LessonFactory" />
+    <MESSAGE value="Adding Main" />
+    <MESSAGE value="Updating workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating workspace.xml" />
   </component>
 </project>
