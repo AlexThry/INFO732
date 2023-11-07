@@ -5,6 +5,7 @@ public abstract class Lesson {
     private Date startDate;
     private Date endDate;
     private String subject;
+    private ArrayList<Grade> grades = new ArrayList<>();
 
     public Lesson(Date startDate, Date endDate, String subject) {
         this.startDate = startDate;
@@ -48,5 +49,13 @@ public abstract class Lesson {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public ArrayList<Grade> getGrades() {
+        return grades;
+    }
+
+    public void addGrade(Grade grade) {
+        this.grades.add(grade);
     }
 }

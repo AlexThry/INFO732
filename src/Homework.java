@@ -1,8 +1,9 @@
-public class Homework {
+public class Homework extends ToDo {
     private String type;
     private String homework;
 
-    public Homework(String type, String homework) {
+    public Homework(String content, Boolean isDone, String type, String homework) {
+        super(content, isDone);
         this.type = type;
         this.homework = homework;
     }
