@@ -58,4 +58,20 @@ public abstract class Lesson {
     public void addGrade(Grade grade) {
         this.grades.add(grade);
     }
+
+    public int getAverage(){
+        int sum = 0;
+        for(Grade grade : grades){
+            sum += grade.getValue();
+        }
+        return (sum/grades.size());
+    }
+
+    @Override
+    public String toString() {
+        return "cours de : " + subject + "\n" +
+                "commence le : " + startDate.toString() + "\n" +
+                "finit le : " + endDate.toString() + "\n" +
+                "moyenne : " + getAverage();
+    }
 }

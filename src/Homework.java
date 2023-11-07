@@ -23,4 +23,11 @@ public class Homework extends ToDo {
     public void setHomework(String homework) {
         this.homework = homework;
     }
+
+    @Override
+    public String toString() {
+        return "travail : " + "\n" +
+                "type : " + type + "\n" +
+                "contenu : " + homework;
+    }
 }

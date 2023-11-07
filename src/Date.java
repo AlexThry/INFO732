@@ -26,4 +26,17 @@ public class Date {
         date.put("minute", this.minute);
         return date;
     }
+
+    public String formatMonth(){
+        if(mounth < 10){
+            return "0" + mounth;
+        }else {
+            return "" + mounth;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return day + "/" + formatMonth() + "/" + year + ", " + hour + ":" + minute;
+    }
 }

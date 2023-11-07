@@ -22,4 +22,13 @@ public class ToDo {
     public void setDone(Boolean done) {
         isDone = done;
     }
+
+    @Override
+    public String toString() {
+        String done = "fait";
+        if(!isDone){
+            done = "à faire";
+        }
+        return content + ", " + done;
+    }
 }

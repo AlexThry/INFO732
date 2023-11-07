@@ -21,4 +21,5 @@ public class Grade {
     public void setStudentLogin(String studentLogin) {
         this.studentLogin = studentLogin;
     }
+
 }
