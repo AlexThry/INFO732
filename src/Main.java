@@ -68,12 +68,16 @@ public class Main {
             switch (option) {
                 case "1":
                     System.out.println("Création de module");
+                    break;
                 case "2":
                     System.out.println("Ajout de module");
+                    break;
                 case "3":
                     System.out.println("Ajout de devoir");
+                    break;
                 case "4":
                     quit = true;
+                    break;
             }
         } else if (userStatus.equals("S")) {
             String option = consoleEntry("1. Voir les prochaines lessons \n2. Quitter");
