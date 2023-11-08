@@ -15,6 +15,34 @@ public class Main {
         return scanner.nextLine();
     }
 
+    public static void createDefault(ArrayList<User> users){
+        modules.add(new Modules("INFO732", 1));
+        modules.add(new Modules("MATH501", 2));
+        modules.add(new Modules("INFO731", 3));
+
+        modules.get(0).addStudents(users.get(0));
+        modules.get(1).addStudents(users.get(0));
+
+        Lesson lesson1 = LessonFactory.createLesson("TD",
+                new Date(30, 8, 17, 11, 2023),
+                new Date(0, 10, 17, 11, 2023),
+                "modélisation");
+
+        Lesson lesson2 = LessonFactory.createLesson("CC",
+                new Date(30, 8, 18, 11, 2023),
+                new Date(0, 10, 18, 11, 2023),
+                "modélisation");
+
+        Lesson lesson3 = LessonFactory.createLesson("TP",
+                new Date(30, 8, 19, 11, 2023),
+                new Date(0, 10, 19, 11, 2023),
+                "proba");
+
+        modules.get(1).addLesson(lesson3);
+        modules.get(1).addLesson(lesson1);
+        modules.get(0).addLesson(lesson2);
+    }
+
     public static boolean connect(ArrayList<User> users, String login, String password) {
         for (User user: users) {
             if (user.getLogin().equals(login)) {
@@ -56,8 +84,10 @@ public class Main {
                             System.out.println(module.toString());
                         }
                     }
+                    break;
                 case "2":
                     quit = true;
+                    break;
             }
         }
     }
@@ -65,31 +95,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<User> users = new ArrayList<>();
         users.add(new Student("john", "mdp"));
-        modules.add(new Modules("INFO732", 1));
-        modules.add(new Modules("MATH501", 2));
-        modules.add(new Modules("INFO731", 3));
-
-        modules.get(0).addStudents(users.get(0));
-        modules.get(1).addStudents(users.get(0));
-
-        Lesson lesson1 = LessonFactory.createLesson("TD",
-                new Date(30, 8, 17, 11, 2023),
-                new Date(0, 10, 17, 11, 2023),
-                "modélisation");
-
-        Lesson lesson2 = LessonFactory.createLesson("CC",
-                new Date(30, 8, 18, 11, 2023),
-                new Date(0, 10, 18, 11, 2023),
-                "modélisation");
-
-        Lesson lesson3 = LessonFactory.createLesson("TP",
-                new Date(30, 8, 19, 11, 2023),
-                new Date(0, 10, 19, 11, 2023),
-                "proba");
-
-        modules.get(1).addLesson(lesson3);
-        modules.get(1).addLesson(lesson1);
-        modules.get(0).addLesson(lesson2);
+        createDefault(users);
 
         while (!(quit)) {
             System.out.println("Bienvenu sur votre dashboard !");

@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d13dc1c-ad73-414b-a531-059faa792faa" name="Changes" comment="ajout de valeurs de test par défaut">
+    <list default="true" id="5d13dc1c-ad73-414b-a531-059faa792faa" name="Changes" comment="affichage des lessons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lesson.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699427807489</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="affichage des lessons">
+      <created>1699430509841</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699430509841</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +135,7 @@
     <MESSAGE value="toString" />
     <MESSAGE value="worspace" />
     <MESSAGE value="ajout de valeurs de test par défaut" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout de valeurs de test par défaut" />
+    <MESSAGE value="affichage des lessons" />
+    <option name="LAST_COMMIT_MESSAGE" value="affichage des lessons" />
   </component>
 </project>
