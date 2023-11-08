@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public abstract class Lesson {
     private ArrayList<Homework> homeworks = new ArrayList<>();
-    private Date startDate;
-    private Date endDate;
+    private Dates startDates;
+    private Dates endDates;
     private String subject;
     private ArrayList<Grade> grades = new ArrayList<>();
 
-    public Lesson(Date startDate, Date endDate, String subject) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Lesson(Dates startDates, Dates endDates, String subject) {
+        this.startDates = startDates;
+        this.endDates = endDates;
         this.subject = subject;
     }
 
@@ -27,20 +27,20 @@ public abstract class Lesson {
         this.homeworks = homeworks;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Dates getStartDate() {
+        return startDates;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDate(Dates startDates) {
+        this.startDates = startDates;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Dates getEndDate() {
+        return endDates;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEndDate(Dates endDates) {
+        this.endDates = endDates;
     }
 
     public String getSubject() {
@@ -74,8 +74,8 @@ public abstract class Lesson {
     @Override
     public String toString() {
         return "cours de : " + subject + "\n" +
-                "commence le : " + startDate.toString() + "\n" +
-                "finit le : " + endDate.toString() + "\n" +
+                "commence le : " + startDates.toString() + "\n" +
+                "finit le : " + endDates.toString() + "\n" +
                 "moyenne : " + getAverage();
     }
 }

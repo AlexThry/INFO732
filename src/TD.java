@@ -1,6 +1,6 @@
 public class TD extends Lesson {
 
-    public TD(Date startDate, Date endDate, String subject) {
-        super(startDate, endDate, subject);
+    public TD(Dates startDates, Dates endDates, String subject) {
+        super(startDates, endDates, subject);
     }
 }

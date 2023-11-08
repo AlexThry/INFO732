@@ -50,7 +50,7 @@ public class Modules {
         return lessons;
     }
 
-    public void addLesson(String type, Date startDate, Date endDate, String subject) {
-        this.lessons.add(LessonFactory.createLesson(type, startDate, endDate, subject));
+    public void addLesson(String type, Dates startDates, Dates endDates, String subject) {
+        this.lessons.add(LessonFactory.createLesson(type, startDates, endDates, subject));
     }
 }

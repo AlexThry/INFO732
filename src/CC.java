@@ -1,6 +1,6 @@
 public class CC extends Lesson {
 
-    public CC(Date startDate, Date endDate, String subject) {
-        super(startDate, endDate, subject);
+    public CC(Dates startDates, Dates endDates, String subject) {
+        super(startDates, endDates, subject);
     }
 }

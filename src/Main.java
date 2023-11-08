@@ -15,13 +15,13 @@ public class Main {
         return scanner.nextLine();
     }
 
-    public static Date dateEntry() {
+    public static Dates dateEntry() {
         int year = Integer.parseInt(consoleEntry("Entrez une année : "));
         int mounth = Integer.parseInt(consoleEntry("Entrez un mois : "));
         int day = Integer.parseInt(consoleEntry("Entrez un jour : "));
         int hour = Integer.parseInt(consoleEntry("Entrez une heure : "));
         int minute = Integer.parseInt(consoleEntry("Entrez une minute : "));
-        return new Date(minute, hour, day, mounth, year);
+        return new Dates(minute, hour, day, mounth, year);
     }
 
     public static void createDefault(ArrayList<User> users){
@@ -33,18 +33,18 @@ public class Main {
         modules.get(1).addStudents(users.get(0));
 
         Lesson lesson1 = LessonFactory.createLesson("TD",
-                new Date(30, 8, 17, 11, 2023),
-                new Date(0, 10, 17, 11, 2023),
+                new Dates(30, 8, 17, 11, 2023),
+                new Dates(0, 10, 17, 11, 2023),
                 "modélisation");
 
         Lesson lesson2 = LessonFactory.createLesson("CC",
-                new Date(30, 8, 18, 11, 2023),
-                new Date(0, 10, 18, 11, 2023),
+                new Dates(30, 8, 18, 11, 2023),
+                new Dates(0, 10, 18, 11, 2023),
                 "modélisation");
 
         Lesson lesson3 = LessonFactory.createLesson("TP",
-                new Date(30, 8, 19, 11, 2023),
-                new Date(0, 10, 19, 11, 2023),
+                new Dates(30, 8, 19, 11, 2023),
+                new Dates(0, 10, 19, 11, 2023),
                 "proba");
 
         modules.get(1).addLesson(lesson3);
@@ -84,9 +84,11 @@ public class Main {
             String type = consoleEntry("Veuillez choisir le type de lesson : \nTD, TP, CC");
             if (type.equals("TD") || type.equals("TP") || type.equals("CC")) {
                 System.out.println("Choisissez une date de début :");
-                Date startDate = dateEntry();
+//                Dates startDate = dateEntry();
+                Dates startDate = new Dates(0, 0, 0, 0, 2020);
+                Dates endDate = new Dates(0, 0, 0, 0, 2020);
                 System.out.println("Choisissez une date de fin :");
-                Date endDate = dateEntry();
+//                Dates endDate = dateEntry();
                 String lessonSubject = consoleEntry("Entrez le sujet de la lesson : ");
                 chosenModule.addLesson(type, startDate, endDate, lessonSubject);
             }
@@ -107,6 +109,7 @@ public class Main {
                     createModule(consoleEntry("Veuillez entrer le nom du module : "));
                     break;
                 case "2":
+                    addLessonToModule();
                     System.out.println("Ajout de module");
                     break;
                 case "3":
