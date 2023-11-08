@@ -15,6 +15,15 @@ public class Main {
         return scanner.nextLine();
     }
 
+    public static Date dateEntry() {
+        int year = Integer.parseInt(consoleEntry("Entrez une année : "));
+        int mounth = Integer.parseInt(consoleEntry("Entrez un mois : "));
+        int day = Integer.parseInt(consoleEntry("Entrez un jour : "));
+        int hour = Integer.parseInt(consoleEntry("Entrez une heure : "));
+        int minute = Integer.parseInt(consoleEntry("Entrez une minute : "));
+        return new Date(minute, hour, day, mounth, year);
+    }
+
     public static void createDefault(ArrayList<User> users){
         modules.add(new Modules("INFO732", 1));
         modules.add(new Modules("MATH501", 2));
@@ -60,14 +69,42 @@ public class Main {
         return false;
     }
 
+    public static void createModule(String moduleName) {
+        int moduleId = modules.size();
+        modules.add(new Modules(moduleName, moduleId));
+    }
+
+    public static void addLessonToModule() {
+        for (int i = 0; i < modules.size(); i ++) {
+            System.out.println(i + ". " + modules.get(i).getSubject());
+        }
+        try {
+            int value = Integer.parseInt(consoleEntry("Choisissez un module : "));
+            Modules chosenModule = modules.get(value);
+            String type = consoleEntry("Veuillez choisir le type de lesson : \nTD, TP, CC");
+            if (type.equals("TD") || type.equals("TP") || type.equals("CC")) {
+                System.out.println("Choisissez une date de début :");
+                Date startDate = dateEntry();
+                System.out.println("Choisissez une date de fin :");
+                Date endDate = dateEntry();
+                String lessonSubject = consoleEntry("Entrez le sujet de la lesson : ");
+                chosenModule.addLesson(type, startDate, endDate, lessonSubject);
+            }
+        } catch (Exception e) {
+            System.out.println("Veuillez choisir une valeur correcte");
+        }
+
+    }
+
     public static void dashboard(User user, String userStatus) {
         System.out.println("Bienvenue " + user.getLogin() + " !");
         System.out.println("Que souhaitez vous faire ?");
         if (userStatus.equals("A")) {
-            String option = consoleEntry("1. Créer un module \n2. Ajouter une lesson à un module \n3. Ajouter un devoir \n4. Quitter");
+            String option = consoleEntry("1. Créer un module \n2. Ajouter une lesson à un module \n3. Ajouter un devoir \n4. Afficher modules \n5. Afficher les lessons d'un module \n6. Déconnecter");
             switch (option) {
                 case "1":
                     System.out.println("Création de module");
+                    createModule(consoleEntry("Veuillez entrer le nom du module : "));
                     break;
                 case "2":
                     System.out.println("Ajout de module");
@@ -76,11 +113,21 @@ public class Main {
                     System.out.println("Ajout de devoir");
                     break;
                 case "4":
-                    quit = true;
+                    System.out.println(modules);
+                    break;
+                case "5":
+                    for (int i = 0; i < modules.size(); i ++) {
+                        System.out.println(i + ". " + modules.get(i).getSubject());
+                    }
+                    int value = Integer.parseInt(consoleEntry("Choisissez un module : "));
+                    System.out.println(modules.get(value).getLessons());
+                    break;
+                case "6":
+                    currentUser = null;
                     break;
             }
         } else if (userStatus.equals("S")) {
-            String option = consoleEntry("1. Voir les prochaines lessons \n2. Quitter");
+            String option = consoleEntry("1. Voir les prochaines lessons \n2. Déconnecter");
             switch (option) {
                 case "1":
                     for(Modules module : modules){
@@ -90,8 +137,7 @@ public class Main {
                     }
                     break;
                 case "2":
-                    quit = true;
-                    break;
+                    currentUser = null;
             }
         }
     }
@@ -99,11 +145,12 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<User> users = new ArrayList<>();
         users.add(new Student("john", "mdp"));
+        users.add(new Admin("fred", "mdp"));
         createDefault(users);
 
         while (!(quit)) {
             System.out.println("Bienvenu sur votre dashboard !");
-            String haveAccount = consoleEntry("Avez vous un compte ? Y/n");
+            String haveAccount = consoleEntry("Avez vous un compte ? Y/n/q");
             if (haveAccount.toUpperCase().equals("N")) {
                 String status = consoleEntry("Selectionnez votre situation : Admin (A) / Student (S)");
                 if (status.equals("A") || status.equals("S")) {
@@ -125,20 +172,15 @@ public class Main {
                 String login = consoleEntry("Veuillez entrer votre login : ");
                 String password = consoleEntry("Veuillez entrer votre mot de passe : ");
                 if (connect(users, login, password)) {
-                    while (!quit) {
+                    while (!(currentUser == null)) {
                         dashboard(currentUser, currentUserStatus);
                     }
-
-
-
-
-
-
-
 
                 } else {
                     System.out.println("Identifiant ou mot de passe incorrect");
                 }
+            } else if (haveAccount.toUpperCase().equals("Q")) {
+                quit = true;
             } else {
                 System.out.println("Veuillez entrer une valeur correcte");
             }

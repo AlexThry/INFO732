@@ -1,0 +1,202 @@
+Index: src/Modules.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\n\npublic class Modules {\n\n    private String subject;\n    private int moduleId;\n    private ArrayList<Lesson> lessons = new ArrayList<>();\n\n    private ArrayList<Student> students = new ArrayList<>();\n\n    public Modules(String subject, int moduleId) {\n        this.subject = subject;\n        this.moduleId = moduleId;\n    }\n\n    public void addStudents(Student student){\n        students.add(student);\n    }\n\n    public ArrayList<Student> getStudents() {\n        return students;\n    }\n\n    public ArrayList<String> getStudentsLogin() {\n        ArrayList<String> studentsLogin = new ArrayList<>();\n        for(Student student : students){\n            studentsLogin.add(student.getLogin());\n        }\n        return studentsLogin;\n    }\n\n    @Override\n    public String toString() {\n        return \"Modules de : \" +\n                subject;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Modules.java b/src/Modules.java
+--- a/src/Modules.java	(revision f1f75b0949f6ab16b4fe46bee8ed0081ff58855b)
++++ b/src/Modules.java	(date 1699431685453)
+@@ -34,4 +34,16 @@
+         return "Modules de : " +
+                 subject;
+     }
++
++    public String getSubject() {
++        return subject;
++    }
++
++    public ArrayList<Lesson> getLessons() {
++        return lessons;
++    }
++
++    public void addLesson(String type, Date startDate, Date endDate, String subject) {
++        this.lessons.add(LessonFactory.createLesson(type, startDate, endDate, subject));
++    }
+ }
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.ArrayList;\nimport java.util.Scanner;\n\npublic class Main {\n\n    static User currentUser = null;\n    static String currentUserStatus = null;\n    static boolean quit = false;\n    static ArrayList<Modules> modules = new ArrayList<>();\n\n\n    public static String consoleEntry(String message) {\n        Scanner scanner = new Scanner(System.in);\n        System.out.println(message);\n        return scanner.nextLine();\n    }\n\n    public static boolean connect(ArrayList<User> users, String login, String password) {\n        for (User user: users) {\n            if (user.getLogin().equals(login)) {\n                if (user.getPassword().equals(password)) {\n                    currentUser = user;\n                    if (currentUser instanceof Admin) {\n                        currentUserStatus = \"A\";\n                    } else {\n                        currentUserStatus = \"S\";\n                    }\n                    return true;\n                }\n            }\n        }\n        return false;\n    }\n\n    public static void dashboard(User user, String userStatus) {\n        System.out.println(\"Bienvenue \" + user.getLogin() + \" !\");\n        System.out.println(\"Que souhaitez vous faire ?\");\n        if (userStatus.equals(\"A\")) {\n            String option = consoleEntry(\"1. Créer un module \\n2. Ajouter une lesson à un module \\n3. Ajouter un devoir \\n4. Quitter\");\n            switch (option) {\n                case \"1\":\n                    System.out.println(\"Création de module\");\n                case \"2\":\n                    System.out.println(\"Ajout de module\");\n                case \"3\":\n                    System.out.println(\"Ajout de devoir\");\n                case \"4\":\n                    quit = true;\n            }\n        } else if (userStatus.equals(\"S\")) {\n            String option = consoleEntry(\"1. Voir les prochaines lessons \\n2. Quitter\");\n            switch (option) {\n                case \"1\":\n                    for(Modules module : modules){\n                        if(module.getStudentsLogin().contains(currentUser.getLogin())){\n                            module.toString();\n                        }\n                    }\n                    System.out.println(\"Lessons\");\n                case \"2\":\n                    quit = true;\n            }\n        }\n    }\n\n    public static void main(String[] args) {\n        ArrayList<User> users = new ArrayList<>();\n        users.add(new Student(\"john\", \"mdp\"));\n        modules.add(new Modules(\"INFO732\", 1));\n        modules.add(new Modules(\"MATH501\", 2));\n        modules.add(new Modules(\"INFO731\", 3));\n\n\n\n        while (!(quit)) {\n            System.out.println(\"Bienvenu sur votre dashboard !\");\n            String haveAccount = consoleEntry(\"Avez vous un compte ? Y/n\");\n            if (haveAccount.toUpperCase().equals(\"N\")) {\n                String status = consoleEntry(\"Selectionnez votre situation : Admin (A) / Student (S)\");\n                if (status.equals(\"A\") || status.equals(\"S\")) {\n                    String login = consoleEntry(\"Entrez votre login : \");\n                    String password = consoleEntry(\"Entrez votre mot de passe : \");\n                    try {\n                        User user = UserFactory.createUser(status, login, password);\n                        users.add(user);\n                        System.out.println(\"Votre compte à été crée ! Veuillez vous connecter.\");\n                    } catch (Exception e) {\n                        System.out.println(e.getMessage());\n                    }\n                } else {\n                    System.out.println(\"Veuillez entrer une valeur correcte\");\n                }\n\n\n            } else if (haveAccount.toUpperCase().equals(\"Y\")) {\n                String login = consoleEntry(\"Veuillez entrer votre login : \");\n                String password = consoleEntry(\"Veuillez entrer votre mot de passe : \");\n                if (connect(users, login, password)) {\n                    while (!quit) {\n                        dashboard(currentUser, currentUserStatus);\n                    }\n\n\n\n\n\n\n\n\n                } else {\n                    System.out.println(\"Identifiant ou mot de passe incorrect\");\n                }\n            } else {\n                System.out.println(\"Veuillez entrer une valeur correcte\");\n            }\n\n        }\n\n\n\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision f1f75b0949f6ab16b4fe46bee8ed0081ff58855b)
++++ b/src/Main.java	(date 1699431776313)
+@@ -15,6 +15,15 @@
+         return scanner.nextLine();
+     }
+ 
++    public static Date dateEntry() {
++        int year = Integer.parseInt(consoleEntry("Entrez une année : "));
++        int mounth = Integer.parseInt(consoleEntry("Entrez un mois : "));
++        int day = Integer.parseInt(consoleEntry("Entrez un jour : "));
++        int hour = Integer.parseInt(consoleEntry("Entrez une heure : "));
++        int minute = Integer.parseInt(consoleEntry("Entrez une minute : "));
++        return new Date(minute, hour, day, mounth, year);
++    }
++
+     public static boolean connect(ArrayList<User> users, String login, String password) {
+         for (User user: users) {
+             if (user.getLogin().equals(login)) {
+@@ -32,23 +41,66 @@
+         return false;
+     }
+ 
++    public static void createModule(String moduleName) {
++        int moduleId = modules.size();
++        modules.add(new Modules(moduleName, moduleId));
++    }
++
++    public static void addLessonToModule() {
++        for (int i = 0; i < modules.size(); i ++) {
++            System.out.println(i + ". " + modules.get(i).getSubject());
++        }
++        try {
++            int value = Integer.parseInt(consoleEntry("Choisissez un module : "));
++            Modules chosenModule = modules.get(value);
++            String type = consoleEntry("Veuillez choisir le type de lesson : \nTD, TP, CC");
++            if (type.equals("TD") || type.equals("TP") || type.equals("CC")) {
++                System.out.println("Choisissez une date de début :");
++                Date startDate = dateEntry();
++                System.out.println("Choisissez une date de fin :");
++                Date endDate = dateEntry();
++                String lessonSubject = consoleEntry("Entrez le sujet de la lesson : ");
++                chosenModule.addLesson(type, startDate, endDate, lessonSubject);
++            }
++        } catch (Exception e) {
++            System.out.println("Veuillez choisir une valeur correcte");
++        }
++
++    }
++
+     public static void dashboard(User user, String userStatus) {
+         System.out.println("Bienvenue " + user.getLogin() + " !");
+         System.out.println("Que souhaitez vous faire ?");
+         if (userStatus.equals("A")) {
+-            String option = consoleEntry("1. Créer un module \n2. Ajouter une lesson à un module \n3. Ajouter un devoir \n4. Quitter");
++            String option = consoleEntry("1. Créer un module \n2. Ajouter une lesson à un module \n3. Ajouter un devoir \n4. Afficher modules \n5. Afficher les lessons d'un module \n6. Déconnecter");
+             switch (option) {
+                 case "1":
+                     System.out.println("Création de module");
++                    createModule(consoleEntry("Veuillez entrer le nom du module : "));
++                    break;
+                 case "2":
+-                    System.out.println("Ajout de module");
++                    System.out.println("Ajout de lesson à un module");
++                    addLessonToModule();
++                    break;
+                 case "3":
+                     System.out.println("Ajout de devoir");
++                    break;
+                 case "4":
+-                    quit = true;
++                    System.out.println(modules);
++                    break;
++                case "5":
++                    for (int i = 0; i < modules.size(); i ++) {
++                        System.out.println(i + ". " + modules.get(i).getSubject());
++                    }
++                    int value = Integer.parseInt(consoleEntry("Choisissez un module : "));
++                    System.out.println(modules.get(value).getLessons());
++                    break;
++                case "6":
++                    currentUser = null;
++                    break;
+             }
+         } else if (userStatus.equals("S")) {
+-            String option = consoleEntry("1. Voir les prochaines lessons \n2. Quitter");
++            String option = consoleEntry("1. Voir les prochaines lessons \n2. Déconnecter");
+             switch (option) {
+                 case "1":
+                     for(Modules module : modules){
+@@ -58,7 +110,7 @@
+                     }
+                     System.out.println("Lessons");
+                 case "2":
+-                    quit = true;
++                    currentUser = null;
+             }
+         }
+     }
+@@ -66,6 +118,7 @@
+     public static void main(String[] args) {
+         ArrayList<User> users = new ArrayList<>();
+         users.add(new Student("john", "mdp"));
++        users.add(new Admin("fred", "mdp"));
+         modules.add(new Modules("INFO732", 1));
+         modules.add(new Modules("MATH501", 2));
+         modules.add(new Modules("INFO731", 3));
+@@ -74,7 +127,7 @@
+ 
+         while (!(quit)) {
+             System.out.println("Bienvenu sur votre dashboard !");
+-            String haveAccount = consoleEntry("Avez vous un compte ? Y/n");
++            String haveAccount = consoleEntry("Avez vous un compte ? Y/n/q");
+             if (haveAccount.toUpperCase().equals("N")) {
+                 String status = consoleEntry("Selectionnez votre situation : Admin (A) / Student (S)");
+                 if (status.equals("A") || status.equals("S")) {
+@@ -96,20 +149,15 @@
+                 String login = consoleEntry("Veuillez entrer votre login : ");
+                 String password = consoleEntry("Veuillez entrer votre mot de passe : ");
+                 if (connect(users, login, password)) {
+-                    while (!quit) {
++                    while (!(currentUser == null)) {
+                         dashboard(currentUser, currentUserStatus);
+                     }
+ 
+-
+-
+-
+-
+-
+-
+-
+                 } else {
+                     System.out.println("Identifiant ou mot de passe incorrect");
+                 }
++            } else if (haveAccount.toUpperCase().equals("Q")) {
++                quit = true;
+             } else {
+                 System.out.println("Veuillez entrer une valeur correcte");
+             }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"5d13dc1c-ad73-414b-a531-059faa792faa\" name=\"Changes\" comment=\"worspace\">\n      <change beforePath=\"$PROJECT_DIR$/.gitignore\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gitignore\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Date.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Date.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Grade.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Grade.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Homework.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Homework.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Lesson.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Lesson.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Modules.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Modules.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ToDo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ToDo.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2XLdW7cy6xnm4QAV4rXh0uLDj6A\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"5d13dc1c-ad73-414b-a531-059faa792faa\" name=\"Changes\" comment=\"worspace\" />\n      <created>1698412324565</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1698412324565</updated>\n      <workItem from=\"1698412325735\" duration=\"4516000\" />\n      <workItem from=\"1699364528832\" duration=\"2379000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Adding classes\">\n      <created>1699367140798</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1699367140798</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"test branche\">\n      <created>1699369395891</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1699369395891</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"toString\">\n      <created>1699372699987</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1699372699987</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"worspace\">\n      <created>1699374546748</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1699374546748</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"5\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"main\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Adding classes\" />\n    <MESSAGE value=\"test branche\" />\n    <MESSAGE value=\"toString\" />\n    <MESSAGE value=\"worspace\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"worspace\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision f1f75b0949f6ab16b4fe46bee8ed0081ff58855b)
++++ b/.idea/workspace.xml	(date 1699429599174)
+@@ -4,16 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="5d13dc1c-ad73-414b-a531-059faa792faa" name="Changes" comment="worspace">
+-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
++    <list default="true" id="5d13dc1c-ad73-414b-a531-059faa792faa" name="Changes" comment="workspace.xml">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Date.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Grade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Grade.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Homework.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lesson.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Modules.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ToDo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ToDo.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />

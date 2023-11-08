@@ -41,4 +41,16 @@ public class Modules {
                 subject + "\n" +
                 listeLesson;
     }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public ArrayList<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void addLesson(String type, Date startDate, Date endDate, String subject) {
+        this.lessons.add(LessonFactory.createLesson(type, startDate, endDate, subject));
+    }
 }
