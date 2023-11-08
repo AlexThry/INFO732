@@ -64,7 +64,11 @@ public abstract class Lesson {
         for(Grade grade : grades){
             sum += grade.getValue();
         }
-        return (sum/grades.size());
+        if(grades.size() == 0){
+            return 10;
+        }else {
+            return (sum/grades.size());
+        }
     }
 
     @Override

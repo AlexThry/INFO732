@@ -53,10 +53,9 @@ public class Main {
                 case "1":
                     for(Modules module : modules){
                         if(module.getStudentsLogin().contains(currentUser.getLogin())){
-                            module.toString();
+                            System.out.println(module.toString());
                         }
                     }
-                    System.out.println("Lessons");
                 case "2":
                     quit = true;
             }
@@ -70,7 +69,27 @@ public class Main {
         modules.add(new Modules("MATH501", 2));
         modules.add(new Modules("INFO731", 3));
 
+        modules.get(0).addStudents(users.get(0));
+        modules.get(1).addStudents(users.get(0));
 
+        Lesson lesson1 = LessonFactory.createLesson("TD",
+                new Date(30, 8, 17, 11, 2023),
+                new Date(0, 10, 17, 11, 2023),
+                "modélisation");
+
+        Lesson lesson2 = LessonFactory.createLesson("CC",
+                new Date(30, 8, 18, 11, 2023),
+                new Date(0, 10, 18, 11, 2023),
+                "modélisation");
+
+        Lesson lesson3 = LessonFactory.createLesson("TP",
+                new Date(30, 8, 19, 11, 2023),
+                new Date(0, 10, 19, 11, 2023),
+                "proba");
+
+        modules.get(1).addLesson(lesson3);
+        modules.get(1).addLesson(lesson1);
+        modules.get(0).addLesson(lesson2);
 
         while (!(quit)) {
             System.out.println("Bienvenu sur votre dashboard !");

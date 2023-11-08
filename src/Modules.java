@@ -6,32 +6,39 @@ public class Modules {
     private int moduleId;
     private ArrayList<Lesson> lessons = new ArrayList<>();
 
-    private ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<User> students = new ArrayList<>();
 
     public Modules(String subject, int moduleId) {
         this.subject = subject;
         this.moduleId = moduleId;
     }
 
-    public void addStudents(Student student){
-        students.add(student);
+    public void addStudents(User user){
+        students.add(user);
     }
 
-    public ArrayList<Student> getStudents() {
+    public void addLesson(Lesson lesson){lessons.add(lesson);};
+
+    public ArrayList<User> getStudents() {
         return students;
     }
 
     public ArrayList<String> getStudentsLogin() {
         ArrayList<String> studentsLogin = new ArrayList<>();
-        for(Student student : students){
-            studentsLogin.add(student.getLogin());
+        for(User user : students){
+            studentsLogin.add(user.getLogin());
         }
         return studentsLogin;
     }
 
     @Override
     public String toString() {
-        return "Modules de : " +
-                subject;
+        String listeLesson = "";
+        for(Lesson lesson : lessons){
+            listeLesson += lesson.toString() + "\n";
+        }
+        return "Module de : " + "\n" +
+                subject + "\n" +
+                listeLesson;
     }
 }
