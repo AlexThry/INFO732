@@ -6,6 +6,7 @@ public class Main {
     static User currentUser = null;
     static String currentUserStatus = null;
     static boolean quit = false;
+    static ArrayList<Modules> modules = new ArrayList<>();
 
 
     public static String consoleEntry(String message) {
@@ -50,6 +51,11 @@ public class Main {
             String option = consoleEntry("1. Voir les prochaines lessons \n2. Quitter");
             switch (option) {
                 case "1":
+                    for(Modules module : modules){
+                        if(module.getStudentsLogin().contains(currentUser.getLogin())){
+                            module.toString();
+                        }
+                    }
                     System.out.println("Lessons");
                 case "2":
                     quit = true;
@@ -59,6 +65,12 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<User> users = new ArrayList<>();
+        users.add(new Student("john", "mdp"));
+        modules.add(new Modules("INFO732", 1));
+        modules.add(new Modules("MATH501", 2));
+        modules.add(new Modules("INFO731", 3));
+
+
 
         while (!(quit)) {
             System.out.println("Bienvenu sur votre dashboard !");
